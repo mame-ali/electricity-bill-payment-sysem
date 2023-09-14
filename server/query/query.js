@@ -3,6 +3,7 @@ export default {
     user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     user_email VARCHAR(45) NOT NULL,
     user_active_status INT NOT NULL,
+    otp varchar(8),
     user_registration_data DATETIME NOT NULL,
     UNIQUE KEY (user_email)
   );`,
@@ -10,7 +11,7 @@ export default {
   usersPasswordTableCreate: `CREATE TABLE IF NOT EXISTS users_password (
     user_password_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
-    user_password VARCHAR(45) NOT NULL,
+    user_password VARCHAR(255) NOT NULL,
     user_password_created_date DATETIME NOT NULL,
     FOREIGN KEY (user_id)
       REFERENCES users (user_id)
@@ -94,4 +95,14 @@ export default {
     FOREIGN KEY (electric_meter_id)
       REFERENCES electric_meter (electric_meter_id)
   );`,
+
+  getUserByEmail: `select * from users WHERE USER_email=?;`,
+  getOTPByEmail: `select * from users WHERE USER_email=? and otp =?;`,
+  insertIntoUsers: `INSERT INTO users (user_email, user_active_status, otp, user_registration_data) VALUES (?, 0, ?, NOW());`,
+  insertIntoUsersPassword: `INSERT INTO users_password (user_id, user_password, user_password_created_date)VALUES (?, ?, NOW());`,
+  insertIntoUsersInfo: `INSERT INTO users_info (user_id, f_name, m_name, l_name, phone) VALUES (?, ?, ?, ?, ?);`,
+  insertIntoUsersrole: `INSERT INTO users_role (org_role_id, user_id) VALUES (?, ?);`,
+  updateUserActiveStatus: `UPDATE users SET user_active_status = ?, otp = NULL WHERE user_email = ?;`
+  
+
 };

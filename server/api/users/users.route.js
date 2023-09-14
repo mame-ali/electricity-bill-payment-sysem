@@ -1,12 +1,15 @@
 import express from 'express';
 // import auth from '../../auth/auth.js';
 
-// import userController from './users.controller.js';
+import userController from './users.controler.js';
 //import { upload } from '../../config/multer.js';
 const usersRouter = express.Router();
 usersRouter.get('/', (req, res) => { 
     res.send("user")
 });
+
+usersRouter.post('/createuser', userController.createUser)
+usersRouter.post('/confirmotp', userController.confirmOtp)
 
 //usersRouter.get("/", auth, userController.getUserById);
 // usersRouter.post('/createuser', userController.createUser)
