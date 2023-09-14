@@ -8,7 +8,8 @@ const port = process.env.SERVER_PORT;
 const ip = process.env.SERVER_HOST;
 
 //db
-import { connection} from './config/db.js';
+import { connection } from './config/db.js';
+import './config/install.js'
 //midleware 
 
 server.use(cors());

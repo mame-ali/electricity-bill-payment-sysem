@@ -2,12 +2,13 @@ DROP DATABASE IF EXISTS `utility`;
 CREATE DATABASE `utility`;
 USE `utility`;
 
+DROP TABLE USERS;
 CREATE TABLE IF NOT EXISTS `users` (
   `user_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `user_email` VARCHAR(45) NOT NULL,
   `user_active_status` int NOT NULL,
-  `user_registration_data` Datetime not null
-);
+  `user_registration_data` Datetime not null,
+   UNIQUE KEY (user_email));
 
 CREATE TABLE IF NOT EXISTS `users_password`(
 `user_password_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
