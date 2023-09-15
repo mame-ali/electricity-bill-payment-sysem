@@ -106,6 +106,17 @@ export default {
   updateUserActiveStatus: `UPDATE users SET user_active_status = ?, otp = NULL WHERE user_email = ?;`,
   updateOtp: `UPDATE users SET otp = ? WHERE user_email = ?;`,
   updatePassword: `UPDATE users_password SET user_password = ? WHERE user_id = ?`,
-  
+  getUserdata: `SELECT registration.user_id,user_name,user_email,first_name,middle_name,last_name,other_name,image_url FROM registration LEFT JOIN profile ON registration.user_id = profile.user_id WHERE registration.user_id = ?`,
+  updateUserRole: `UPDATE users_role SET org_role_id = ? WHERE user_role_id = ?;`,
+  getUserInfo: `SELECT users.user_id, users.user_email, users.user_active_status,
+       users_info.f_name, users_info.m_name, users_info.l_name, users_info.phone,
+       users_profile.user_profile_image
+        FROM users
+        INNER JOIN users_info ON users.user_id = users_info.user_id
+        LEFT JOIN users_profile ON users.user_id = users_profile.user_id
+        WHERE users.user_id = ?;`,
+  insertElectricMeter: `INSERT INTO electric_meter (account_number, user_id) VALUES (?, ?);`,
+  insertElectricMeterAddress: `INSERT INTO electric_meter_address (electric_meter_id, region, zone, wereda, subcity, kebele, house_number)
+                        VALUES (?, ?, ?, ?, ?, ?, ?);`,
 
 };

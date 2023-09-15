@@ -140,12 +140,65 @@ const  userService = {
                 return callback(null, result);
             })} ,
 
+    //userById
+    userById: (data, callback) => {
+        const getUserInfo = query.getUserInfo;
+
+        connection.query(getUserInfo, [data], (err, result) => {
+            if (err) {
+                return callback(err);
+            }
+            return callback(null, result[0]);
+        })
+    },
 
 
+    // update role
+    updateRole: (data, callback) => { 
+        const updateUserRole = query.updateUserRole;
+        connection.query(updateUserRole,
+            [
+              
+            data.user_id,
+             data.org_role_id
+            ],
+            (error, result, fields) => { 
+             if (error) {return callback(error);}
+                return callback(null, result);
+            })
+    },
+    // add new electric meter
+    addElectricMeter: (data, callback) => {
+        const insertElectricMeter = query.insertElectricMeter;
+        connection.query(insertElectricMeter,
+            [
+            data.account_number,
+             data.user_id
+            ],
+            (error, result, fields) => { 
+             if (error) {return callback(error);}
+                return callback(null, result);
+            })
+     },
 
-
-
-
+    //add Electric Meter Address
+    addElectricMeterAddress: (data, callback) => {
+        const insertElectricMeterAddress = query.insertElectricMeterAddress;
+        connection.query(insertElectricMeterAddress,
+            [
+                data.electric_meter_id,
+                data.region,
+                data.zone,
+                data.wereda,
+                data.subcity,
+                data.kebele,
+                 data.house_number,
+            ],
+            (error, result, fields) => { 
+             if (error) {return callback(error);}
+                return callback(null, result);
+            })
+     }
 
 
 

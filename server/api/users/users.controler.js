@@ -11,114 +11,114 @@ dotenv.config();
 let verify_data;
 
 const userController = {
-    //create user
-    createUser: (req, res) => {
-        // console.log(req.body);
-        const { user_email, user_password, f_name, m_name, l_name, phone } = req.body;
-        if (!user_email || !user_password || !f_name || !m_name || !l_name || !phone) {
-            res.json({ status: "failed", msg: "all fields are reqired" });
+  //create user
+  createUser: (req, res) => {
+    // console.log(req.body);
+    const { user_email, user_password, f_name, m_name, l_name, phone } = req.body;
+    if (!user_email || !user_password || !f_name || !m_name || !l_name || !phone) {
+      res.json({ status: "failed", msg: "all fields are reqired" });
+    }
+    // if email is used befor
+    userService.getUserByEmail(user_email,
+      (err, results) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).json({ msg: "database connection err during  email checking", });
         }
-        // if email is used befor
-        userService.getUserByEmail(user_email,
-            (err, results) => {
-                if (err) {
-                    console.log(err);
-                    return res.status(500).json({ msg: "database connection err during  email checking", });
-                }
-                if (results.length) { 
-                      return res.status(500).json({ msg: "email is already registered", });
-                }
+        if (results.length) {
+          return res.status(500).json({ msg: "email is already registered", });
+        }
                
-            })
+      })
         
-        //password encryption
-        const salt = bcrypt.genSaltSync();
-        req.body.user_password = bcrypt.hashSync(user_password, salt);
-        //otp genarate
-        const otp = generateRandomSixDigitNumber();
-        //send otp to email
-        sendEmail(user_email,otp);
-        req.body.otp = otp;
-        // console.log(req.body);
-       let user_id;
-        //insert data
-        userService.createUser(req.body,
-            (err, results) => {
-                if (err) {
-                    console.log(err);
-                    return res.status(500).json({ msg: "database connection err during inserting users data11", });
-                }
-                user_id = results.insertId;
-                req.body.user_id = user_id;
-                // console.log(`in ${req.body.user_id}`)
-                // console.log(`out ${user_id}`)
-                        userService.addUserPassword(req.body,
-                        (err, results) => {
-                            if (err) {
-                                console.log(err);
-                                return res.status(500).json({ msg: "database connection err during inserting users data", });
-                            }
+    //password encryption
+    const salt = bcrypt.genSaltSync();
+    req.body.user_password = bcrypt.hashSync(user_password, salt);
+    //otp genarate
+    const otp = generateRandomSixDigitNumber();
+    //send otp to email
+    sendEmail(user_email, otp);
+    req.body.otp = otp;
+    // console.log(req.body);
+    let user_id;
+    //insert data
+    userService.createUser(req.body,
+      (err, results) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).json({ msg: "database connection err during inserting users data11", });
+        }
+        user_id = results.insertId;
+        req.body.user_id = user_id;
+        // console.log(`in ${req.body.user_id}`)
+        // console.log(`out ${user_id}`)
+        userService.addUserPassword(req.body,
+          (err, results) => {
+            if (err) {
+              console.log(err);
+              return res.status(500).json({ msg: "database connection err during inserting users data", });
+            }
 
-                            })
+          })
         userService.addUserInfo(req.body,
-            (err, results) => {
-                if (err) {
-                    console.log(err);
-                    return res.status(500).json({ msg: "database connection err during inserting users info", });
-                }
+          (err, results) => {
+            if (err) {
+              console.log(err);
+              return res.status(500).json({ msg: "database connection err during inserting users info", });
+            }
 
-            });
+          });
         userService.addUserrole(req.body,
-            (err, results) => {
-                if (err) {
-                    console.log(err);
-                    return res.status(500).json({ msg: "database connection err during inserting users role", });
-                }
+          (err, results) => {
+            if (err) {
+              console.log(err);
+              return res.status(500).json({ msg: "database connection err during inserting users role", });
+            }
                
-                return res.json({status: 'sucess',msg: 'user created sucessfuly'})
-            });  
-            })  
+            return res.json({ status: 'sucess', msg: 'user created sucessfuly' })
+          });
+      })
 
-    },
+  },
 
-    // confirm OTP
-    confirmOtp: (req, res) => {
-        const { user_email, otp } = req.body;
+  // confirm OTP
+  confirmOtp: (req, res) => {
+    const { user_email, otp } = req.body;
     userService.getOTPByEmail(req.body,
-            (err, results) => {
-                if (err) {
-                    console.log(err);
-                    return res.status(500).json({ msg: "database connection err during  email checking", });
-                }
-                if (!results.length) { 
-                     return res.status(500).json({ status: "failed " ,msg: "incorrect otp", });
-                }
-                if (results.length) {
-                    const data = {
-                        user_active_status: 1,
-                        user_email: user_email
-                        };
-                userService.updateUserActiveStatus(data,(err, results) => {
-                            if (err) {
-                                console.log(err);
-                                return res.status(500).json({ msg: "database connection err during  email checking", });
-                            }
-                    // console.log(results);  
-                    // res.send("sucess");
-                    }
-                )
-                }
+      (err, results) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).json({ msg: "database connection err during  email checking", });
+        }
+        if (!results.length) {
+          return res.status(500).json({ status: "failed ", msg: "incorrect otp", });
+        }
+        if (results.length) {
+          const data = {
+            user_active_status: 1,
+            user_email: user_email
+          };
+          userService.updateUserActiveStatus(data, (err, results) => {
+            if (err) {
+              console.log(err);
+              return res.status(500).json({ msg: "database connection err during  email checking", });
+            }
+            // console.log(results);  
+            // res.send("sucess");
+          }
+          )
+        }
                
-                res.json({ status: "sucess", msg: 'email sucessfully confirmed' });
-                   // console.log(results);
-            })
+        res.json({ status: "sucess", msg: 'email sucessfully confirmed' });
+        // console.log(results);
+      })
            
         
-     },
+  },
      
-    //login
-    login: (req, res) => {
-        const { email, password } = req.body;
+  //login
+  login: (req, res) => {
+    const { email, password } = req.body;
 
     //validation
     if (!email || !password)
@@ -135,46 +135,46 @@ const userController = {
         return res
           .status(404)
           .json({ msg: "No account with this email has been registered" });
-        }
-        let user_id = results[0].user_id;
+      }
+      let user_id = results[0].user_id;
       
-        // check password
-        userService.getUserpasswordByid(user_id, (err, results2) => {
-            if (err) {
-                console.log(err);
-                res.status(500).json({ msg: "database connection err" });
-            }
+      // check password
+      userService.getUserpasswordByid(user_id, (err, results2) => {
+        if (err) {
+          console.log(err);
+          res.status(500).json({ msg: "database connection err" });
+        }
           
         if (!results2) {
-        return res
-          .status(404)
-          .json({ msg: "No account with this email has been registered" });
-            }
+          return res
+            .status(404)
+            .json({ msg: "No account with this email has been registered" });
+        }
     
-     const isMatch = bcrypt.compareSync(password, results2[0].user_password);
-             if (!isMatch)
-        return res
-          .status(404)
-          .json({ msg: "Either the user name or password your entered is incorrect" });
-      //token geneate
-      const token = jwt.sign(
-        { id:  results[0].user_id, email: email },
-        process.env.JWT_SECRET,
-        { expiresIn: "30m" }
-      );
-      return res.json({
-        token,
-        user: {
-          id:  results[0].user_id,
-          email: email,
-        },
-      });
+        const isMatch = bcrypt.compareSync(password, results2[0].user_password);
+        if (!isMatch)
+          return res
+            .status(404)
+            .json({ msg: "Either the user name or password your entered is incorrect" });
+        //token geneate
+        const token = jwt.sign(
+          { id: results[0].user_id, email: email },
+          process.env.JWT_SECRET,
+          { expiresIn: "30m" }
+        );
+        return res.json({
+          token,
+          user: {
+            id: results[0].user_id,
+            email: email,
+          },
+        });
             
 
-        })
+      })
 
         
-        // console.log(isMatch )
+      // console.log(isMatch )
       
      
     });
@@ -206,28 +206,28 @@ const userController = {
               
 
             })
-          return res.json({status: "sucess",msg: "opt send to email"});
+          return res.json({ status: "sucess", msg: "opt send to email" });
 
         }
-      }   
+      }
     );
   },
 
   //change password
 
   changePassword: (req, res) => {
-  const {user_password, user_email } = req.body;
-  console.log(req.body);
+    const { user_password, user_email } = req.body;
+    console.log(req.body);
 
-  if (!user_password || !user_email) {
-    return res
-      .status(400)
-      .json({ msg: "all fields are required" });
-  }
+    if (!user_password || !user_email) {
+      return res
+        .status(400)
+        .json({ msg: "all fields are required" });
+    }
 
-  // Password encryption
-  const salt = bcrypt.genSaltSync();
-  req.body.user_password = bcrypt.hashSync(user_password, salt);
+    // Password encryption
+    const salt = bcrypt.genSaltSync();
+    req.body.user_password = bcrypt.hashSync(user_password, salt);
 
     //check email existance
     userService.getUserByEmail(user_email, (err, results) => {
@@ -242,7 +242,7 @@ const userController = {
       }
       let user_id = results[0].user_id;
       req.body.user_id = user_id;
-        userService.changepassword(req.body, (err, results) => {
+      userService.changepassword(req.body, (err, results) => {
         if (err) {
           console.log(err);
           return res.status(500).json({ msg: "Database connection error" });
@@ -257,16 +257,81 @@ const userController = {
 
 
   
-},
+  },
 
-    
+  //get user info
+  getUserById: (req, res) => {
+    console.log(`###### ${req.user_id}`);
+    userService.userById(req.user_id, (err, results) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({ msg: "database connection err" });
+      }
+      if (!results) {
+        return res.status(404).json({ msg: "Record not found" });
+      }
+      return res.status(200).json({ data: results });
+    });
+  },
+  
+  // asign role 
+  updateUserRole: (req, res) => { 
+    const { user_id, org_role_id } = req.body;
+    // console.log(req.body);
+     userService.updateRole(req.body, (err, results) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({ msg: "database connection err" });
+      }
+      return res.status(200).json({ status: "sucess",msg:"role updated sucessfully" });
+    });
+
+  },
    
+
+  // add new electric meter
+  addElectricMeter: (req, res) => {
+    userService.addElectricMeter(req.body, (err, results) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({ msg: "database connection err" });
+      }
+      req.body.electric_meter_id = results.insertId;
+      userService.addElectricMeterAddress(req.body, (err, results) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).json({ msg: "database connection err" });
+        }
+      //return res.status(200).json({ status: "sucess",msg:"electric meter added sucessfully" });
+      })
+    return res.status(200).json({ status: "sucess",msg:"electric meter added sucessfully" });
+  
+      
+    });
+
+   },
+
+
 }
 
 
 export default userController;
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+//---------------------------------------------------//
 const generateRandomSixDigitNumber = () => {
   return Math.floor(Math.random() * 900000 + 100000);
 };
