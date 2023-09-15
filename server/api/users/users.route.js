@@ -10,7 +10,7 @@ usersRouter.get('/', (req, res) => {
 
 usersRouter.post('/createuser', userController.createUser)
 usersRouter.post('/confirmotp', userController.confirmOtp)
-
+usersRouter.post('/login', userController.login)
 //usersRouter.get("/", auth, userController.getUserById);
 // usersRouter.post('/createuser', userController.createUser)
 // usersRouter.post('/login', userController.login)

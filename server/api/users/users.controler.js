@@ -114,8 +114,71 @@ const userController = {
             })
            
         
-     }
+     },
+     
+    //login
+    login: (req, res) => {
+        const { email, password } = req.body;
+
+    //validation
+    if (!email || !password)
+      return res
+        .status(400)
+        .json({ msg: "Not all fields have been provided!" });
+    //check email existance
+    userService.getUserByEmail(email, (err, results) => {
+      if (err) {
+        console.log(err);
+        res.status(500).json({ msg: "database connection err" });
+      }
+      if (!results) {
+        return res
+          .status(404)
+          .json({ msg: "No account with this email has been registered" });
+        }
+        let user_id = results[0].user_id;
+      
+        // check password
+        userService.getUserpasswordByid(user_id, (err, results2) => {
+            if (err) {
+                console.log(err);
+                res.status(500).json({ msg: "database connection err" });
+            }
+          
+        if (!results2) {
+        return res
+          .status(404)
+          .json({ msg: "No account with this email has been registered" });
+            }
+    
+     const isMatch = bcrypt.compareSync(password, results2[0].user_password);
+             if (!isMatch)
+        return res
+          .status(404)
+          .json({ msg: "Either the user name or password your entered is incorrect" });
+      //token geneate
+      const token = jwt.sign(
+        { id:  results[0].user_id, email: email },
+        process.env.JWT_SECRET,
+        { expiresIn: "30m" }
+      );
+      return res.json({
+        token,
+        user: {
+          id:  results[0].user_id,
+          email: email,
+        },
+      });
+            
+
+        })
+
         
+        // console.log(isMatch )
+      
+     
+    });
+  },
     
    
 }

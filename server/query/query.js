@@ -98,6 +98,7 @@ export default {
 
   getUserByEmail: `select * from users WHERE USER_email=?;`,
   getOTPByEmail: `select * from users WHERE USER_email=? and otp =?;`,
+  getUserpasswordbyid: `select * from users_password where user_id=?`,
   insertIntoUsers: `INSERT INTO users (user_email, user_active_status, otp, user_registration_data) VALUES (?, 0, ?, NOW());`,
   insertIntoUsersPassword: `INSERT INTO users_password (user_id, user_password, user_password_created_date)VALUES (?, ?, NOW());`,
   insertIntoUsersInfo: `INSERT INTO users_info (user_id, f_name, m_name, l_name, phone) VALUES (?, ?, ?, ?, ?);`,

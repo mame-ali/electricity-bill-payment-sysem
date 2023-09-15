@@ -94,7 +94,17 @@ const  userService = {
                 return callback(null, result);
             })} ,
 
-
+    getUserpasswordByid:  (data, callback) => { 
+        const getUserpasswordbyid = query.getUserpasswordbyid;
+        console.log(data);
+        connection.query(getUserpasswordbyid,
+            [
+                 data
+            ],
+            (error, result, fields) => { 
+             if (error) {return callback(error);}
+                return callback(null, result);
+            })} ,
 
 
 
