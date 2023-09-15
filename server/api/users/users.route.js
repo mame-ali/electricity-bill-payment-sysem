@@ -13,7 +13,9 @@ usersRouter.post('/changePassword', userController.changePassword);
 usersRouter.get("/", auth, userController.getUserById);
 usersRouter.post("/assignrole", auth, userController.updateUserRole);
 usersRouter.post("/addelectricmeter", userController.addElectricMeter);
-
+usersRouter.put("/updateElectricMeter", userController.updateElectricMeter);
+usersRouter.put("/updateElectricMeterAddress", userController.updateElectricMeterAddress);
+usersRouter.delete("/deleteElectricMeter/:id", userController.deleteElectricMeter);
 
 //usersRouter.get("/", auth, userController.getUserById);
 // usersRouter.post('/createuser', userController.createUser)

@@ -118,5 +118,19 @@ export default {
   insertElectricMeter: `INSERT INTO electric_meter (account_number, user_id) VALUES (?, ?);`,
   insertElectricMeterAddress: `INSERT INTO electric_meter_address (electric_meter_id, region, zone, wereda, subcity, kebele, house_number)
                         VALUES (?, ?, ?, ?, ?, ?, ?);`,
+  updateElectricMeter: `UPDATE electric_meter SET account_number = ?, user_id = ? WHERE electric_meter_id = ?;`,
+  updateElectricMeterAddress: `UPDATE electric_meter_address
+            SET region = ?, zone = ?, wereda = ?, subcity = ?, kebele = ?, house_number = ?
+            WHERE electric_meter_address_id = ?;`,
+  deleteElectricMeterAddress: `DELETE FROM electric_meter_address WHERE electric_meter_id = ?`,
+  deleteElectricMeter: `DELETE FROM electric_meter WHERE electric_meter_id = ?`,
+
+
+
+
+
+
+
+
 
 };

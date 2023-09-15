@@ -198,9 +198,62 @@ const  userService = {
              if (error) {return callback(error);}
                 return callback(null, result);
             })
-     }
+    },
+    // update new electric meter
+    updateElectricMeter: (data, callback) => {
+        const updateElectricMeter = query.updateElectricMeter;
+        connection.query(updateElectricMeter,
+            [
+            data.account_number,
+            data.user_id,
+             data.electric_meter_id
+            ],
+            (error, result, fields) => { 
+             if (error) {return callback(error);}
+                return callback(null, result);
+            })
+    },
+    
+      // update new electric meter Address
+    updateElectricMeterAddress: (data, callback) => {
+        const updateElectricMeterAddress = query.updateElectricMeterAddress;
+        connection.query(updateElectricMeterAddress,
+            [
+                data.region,
+                data.zone,
+                data.wereda,
+                data.subcity,
+                data.kebele,
+                data.house_number,
+                data.electric_meter_address_id
+            ],
+            (error, result, fields) => { 
+             if (error) {return callback(error);}
+                return callback(null, result);
+            })
+    },
+    
+    //delete Electric Meter Address
+    deleteElectricMeterAddress: (data, callback) => {
+        const deleteElectricMeterAddress = query.deleteElectricMeterAddress;
+        connection.query(deleteElectricMeterAddress,
+            [data],
+            (error, result, fields) => { 
+             if (error) {return callback(error);}
+                return callback(null, result);
+            })
+    },
 
-
+    //delete Electric Meter
+   deleteElectricMeter: (data, callback) => {
+    const deleteElectricMeter = query.deleteElectricMeter;
+    connection.query(deleteElectricMeter,
+        [data],
+        (error, result, fields) => { 
+        if (error) {return callback(error);}
+            return callback(null, result);
+        })
+    },
 
 
 

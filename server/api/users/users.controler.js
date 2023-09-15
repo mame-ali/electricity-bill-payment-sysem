@@ -311,7 +311,66 @@ const userController = {
 
    },
 
+  // update electric meter info 
+  updateElectricMeter: (req, res) => {
+    console.log(req.body);
+    userService.updateElectricMeter(req.body, (err, results) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({ msg: "database connection err" });
+      }
+    return res.status(200).json({ status: "sucess",msg:"electric meter updated sucessfully" });      
+    });
 
+   },
+  
+   // update Electric Meter Address
+  updateElectricMeterAddress: (req, res) => {
+    console.log(req.body);
+    userService.updateElectricMeterAddress(req.body, (err, results) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({ msg: "database connection err" });
+      }
+    return res.status(200).json({ status: "sucess",msg:"electric meter Address updated sucessfully" });      
+    });
+
+   },
+
+  // delete Electric Meter
+  deleteElectricMeter: (req, res) => {
+    const electric_meter_id = req.params.id;
+    userService.deleteElectricMeterAddress(electric_meter_id, (err, results) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({ msg: "database connection err" });
+      }
+      userService.deleteElectricMeter(electric_meter_id, (err, results) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).json({ msg: "database connection err" });
+        }
+      })
+    });
+     return res.status(200).json({ status: "sucess",msg:"electric meter deleted sucessfully" });      
+
+   },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 }
 
 
