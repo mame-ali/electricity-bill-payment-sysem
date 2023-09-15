@@ -103,7 +103,9 @@ export default {
   insertIntoUsersPassword: `INSERT INTO users_password (user_id, user_password, user_password_created_date)VALUES (?, ?, NOW());`,
   insertIntoUsersInfo: `INSERT INTO users_info (user_id, f_name, m_name, l_name, phone) VALUES (?, ?, ?, ?, ?);`,
   insertIntoUsersrole: `INSERT INTO users_role (org_role_id, user_id) VALUES (?, ?);`,
-  updateUserActiveStatus: `UPDATE users SET user_active_status = ?, otp = NULL WHERE user_email = ?;`
+  updateUserActiveStatus: `UPDATE users SET user_active_status = ?, otp = NULL WHERE user_email = ?;`,
+  updateOtp: `UPDATE users SET otp = ? WHERE user_email = ?;`,
+  updatePassword: `UPDATE users_password SET user_password = ? WHERE user_id = ?`,
   
 
 };

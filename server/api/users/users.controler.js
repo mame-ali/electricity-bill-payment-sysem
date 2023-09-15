@@ -180,6 +180,86 @@ const userController = {
     });
   },
     
+  // forget password
+  forgetPassword: (req, res) => {
+    const { user_email } = req.body;
+    console.log(user_email);
+    // if email is used befor
+    userService.getUserByEmail(user_email,
+      (err, results) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).json({ msg: "database connection err during  email checking", });
+        }
+        if (results.length) {
+          //otp genarate
+          const otp = generateRandomSixDigitNumber();
+          req.body.otp = otp;
+          //send otp to email
+          sendEmail(user_email, otp);
+          userService.updateUserOtp(req.body,
+            (err, results) => {
+              if (err) {
+                console.log(err);
+                return res.status(500).json({ msg: "database connection err during  email checking", });
+              }
+              
+
+            })
+          return res.json({status: "sucess",msg: "opt send to email"});
+
+        }
+      }   
+    );
+  },
+
+  //change password
+
+  changePassword: (req, res) => {
+  const {user_password, user_email } = req.body;
+  console.log(req.body);
+
+  if (!user_password || !user_email) {
+    return res
+      .status(400)
+      .json({ msg: "all fields are required" });
+  }
+
+  // Password encryption
+  const salt = bcrypt.genSaltSync();
+  req.body.user_password = bcrypt.hashSync(user_password, salt);
+
+    //check email existance
+    userService.getUserByEmail(user_email, (err, results) => {
+      if (err) {
+        console.log(err);
+        res.status(500).json({ msg: "database connection err" });
+      }
+      if (!results) {
+        return res
+          .status(404)
+          .json({ msg: "No account with this email has been registered" });
+      }
+      let user_id = results[0].user_id;
+      req.body.user_id = user_id;
+        userService.changepassword(req.body, (err, results) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).json({ msg: "Database connection error" });
+        }
+        return res.status(200).json({
+          msg: "Password changed successfully",
+          data: results,
+        });
+      });
+
+    })
+
+
+  
+},
+
+    
    
 }
 
