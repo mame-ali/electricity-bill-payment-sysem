@@ -6,7 +6,9 @@ doenv.config();
 const server = express();
 const port = process.env.SERVER_PORT;
 const ip = process.env.SERVER_HOST;
+import stripe from 'stripe';
 
+const stripeInstance = stripe(process.env.SKEY); // here goes the key from the .env
 //db
 import { connection } from './config/db.js';
 import './config/install.js'
@@ -27,6 +29,23 @@ server.use("/api/users", usersRouter);
 server.use("/api/bills", billsRouter);
 server.use("/api/electric", electricRouter);
 
+server.post("/payments/create", async (req, res) => {
+
+	try {
+		const total = req.query.total;
+		const paymentIntent = await stripeInstance.paymentIntents.create({
+			amount: parseInt(total),
+			currency: "usd",
+		});
+		console.log(paymentIntent.client_secret);
+		res.send({
+			clientSecret: paymentIntent.client_secret,
+		});
+	} catch (error) {
+		console.log(error.message);
+		res.status(500).send("server error");
+	}
+});
 
 
 // testing API
