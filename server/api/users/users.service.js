@@ -47,11 +47,15 @@ const  userService = {
 
     // add user role
     addUserrole: (data, callback) => { 
+        // console.log("------------------------------");
+        // console.log(data)
+        //  console.log("------------------------------");
         const insertIntoUsersrole = query.insertIntoUsersrole;
         connection.query(insertIntoUsersrole,
             [
-                data.user_id,
                 1, 
+                data.user_id,
+               
             ],
             (error, result, fields) => { 
              if (error) {return callback(error);}

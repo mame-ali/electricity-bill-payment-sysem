@@ -13,12 +13,12 @@ let verify_data;
 const userController = {
   //create user
   createUser: (req, res) => {
-    // console.log(req.body);
+     console.log(req.body);
     const { user_email, user_password, f_name, m_name, l_name, phone } = req.body;
     if (!user_email || !user_password || !f_name || !m_name || !l_name || !phone) {
       res.json({ status: "failed", msg: "all fields are reqired" });
     }
-    // if email is used befor
+    // if email is used before
     userService.getUserByEmail(user_email,
       (err, results) => {
         if (err) {
@@ -50,7 +50,7 @@ const userController = {
         }
         user_id = results.insertId;
         req.body.user_id = user_id;
-        // console.log(`in ${req.body.user_id}`)
+      //  console.log(`in ${req.body.user_id}`)
         // console.log(`out ${user_id}`)
         userService.addUserPassword(req.body,
           (err, results) => {
@@ -68,6 +68,7 @@ const userController = {
             }
 
           });
+        
         userService.addUserrole(req.body,
           (err, results) => {
             if (err) {
@@ -119,7 +120,7 @@ const userController = {
   //login
   login: (req, res) => {
     const { email, password } = req.body;
-
+    console.log(req.body);
     //validation
     if (!email || !password)
       return res
