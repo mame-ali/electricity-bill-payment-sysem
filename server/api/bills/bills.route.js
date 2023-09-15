@@ -1,7 +1,10 @@
 import express from 'express';
+import billsController from './bills.controller.js';
+
 const billsRouter = express.Router();
-billsRouter.get('/', (req, res) => { 
-    res.send("bills")
-});
+
+
+
+billsRouter.get("/:account_number", billsController.getbillByAccount);
 
 export default billsRouter;

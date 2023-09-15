@@ -125,9 +125,14 @@ export default {
   deleteElectricMeterAddress: `DELETE FROM electric_meter_address WHERE electric_meter_id = ?`,
   deleteElectricMeter: `DELETE FROM electric_meter WHERE electric_meter_id = ?`,
 
+  insertReadData: `INSERT INTO meter_read (electric_meter_id, user_id, read_data, month, read_date) VALUES (?, ?, ?, ?,NOW());`,
 
+  getElectricMeterReadIdByAccountNumber: `SELECT meter_read.electric_meter_id FROM electric_meter INNER JOIN meter_read ON electric_meter.electric_meter_id = meter_read.electric_meter_id where account_number = ? ;`,
 
-
+  getBillInfoByAccount: `SELECT b.bill_id, e.account_number, b.bill_month, b.bill_status, b.ec_range, b.bill_amount,
+               m.read_data, m.month, m.read_date FROM bills AS b JOIN electric_meter AS e ON b.electric_meter_id = e.electric_meter_id
+              JOIN meter_read AS m ON b.electric_meter_id = m.electric_meter_id
+              JOIN users AS u ON e.user_id = u.user_id WHERE e.account_number = ?`
 
 
 
