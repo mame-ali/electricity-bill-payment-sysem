@@ -1,0 +1,10 @@
+DB_HOST=localhost
+DB_PORT=3333
+DB_USER=root
+DB_PASSWORD=1234
+DB_NAME=utility
+SERVER_HOST=localhost
+SERVER_PORT=4500
+JWT_SECRET=mamesProject
+EMAIL=mihiretuhailegiyorgis@gmail.com
+EMAIL_PASSWORD=bpvwkysosrlkltpw
