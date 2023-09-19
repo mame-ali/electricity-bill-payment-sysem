@@ -13,7 +13,6 @@ let verify_data;
 const userController = {
   //create user
   createUser: (req, res) => {
-     console.log(req.body);
     const { user_email, user_password, f_name, m_name, l_name, phone } = req.body;
     if (!user_email || !user_password || !f_name || !m_name || !l_name || !phone) {
       res.json({ status: "failed", msg: "all fields are reqired" });
@@ -25,13 +24,14 @@ const userController = {
           console.log(err);
           return res.status(500).json({ msg: "database connection err during  email checking", });
         }
+        
         if (results.length) {
+          
           return res.status(500).json({ msg: "email is already registered", });
         }
-               
-      })
-        
-    //password encryption
+        else { 
+
+          //password encryption
     const salt = bcrypt.genSaltSync();
     req.body.user_password = bcrypt.hashSync(user_password, salt);
     //otp genarate
@@ -79,6 +79,15 @@ const userController = {
             return res.json({ status: 'sucess', msg: 'user created sucessfuly' })
           });
       })
+
+
+
+        }
+        
+               
+      })
+        
+    
 
   },
 
@@ -169,6 +178,7 @@ const userController = {
             id: results[0].user_id,
             email: email,
           },
+          msg: 'login sucessfully'
         });
             
 

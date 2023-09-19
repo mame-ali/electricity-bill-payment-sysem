@@ -5,6 +5,7 @@ const  userService = {
     //data comes form the user controller
     createUser: (data, callback) => { 
         const insertIntoUsers = query.insertIntoUsers;
+        
         connection.query(insertIntoUsers,
             [data.user_email,
             data.otp,

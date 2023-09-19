@@ -18,9 +18,17 @@ import usersRouter from "./api/users/users.route.js"
 import billsRouter from "./api/bills/bills.route.js";
 import electricRouter from "./api/electric/electric.route.js";
 
-//midleware 
+//midleware
 
-server.use(cors());
+// server.use(cors());
+server.use(cors({
+    origin: (origin, callback) => {
+        // Allow requests from any origin
+        callback(null, true);
+    },
+    credentials: true // Allow credentials (cookies) to be sent
+}));
+
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
 
