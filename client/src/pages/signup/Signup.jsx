@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import axios from '../../utility/axios';
+import { useNavigate } from 'react-router-dom';
+
 function Signup() {
   const [formData, setFormData] = useState({
     user_email: '',
@@ -11,6 +13,8 @@ function Signup() {
     l_name: '',
     phone: '',
   });
+
+  const navigate3 = useNavigate();
 
   const [errors, setErrors] = useState({
     user_email: '',
@@ -37,19 +41,20 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(formData);
-    if (formvalidation()) { 
+
+    if (formvalidation()) {
       try {
         const response = await axios.post('/api/users/createuser', formData);
         console.log(response);
         alert(response.data.msg);
-      } catch (error) { 
+
+        // Pass the email to the next component
+        navigate3('/confirmotp', { state: { email: formData.user_email } });
+      } catch (error) {
         alert(error.response.data.msg);
         console.log(error);
       }
-      
     }
-  
   };
 
   const formvalidation = () => {
@@ -61,15 +66,6 @@ function Signup() {
       });
       return;
     }
-
-    // Validate password format (uncomment if needed)
-    // if (!passwordRegex.test(formData.user_password)) {
-    //   setErrors({
-    //     ...errors,
-    //     user_password: 'Password must be at least 8 characters long and contain at least one letter and one number',
-    //   });
-    //   return;
-    // }
 
     // Validate password match
     if (formData.user_password !== formData.confirm_password) {
@@ -109,16 +105,6 @@ function Signup() {
     // If validation passes, you can proceed with registration logic here
 
     // Reset the form after successful registration or handle registration errors.
-    // setFormData({
-    //   user_email: '',
-    //   user_password: '',
-    //   confirm_password: '',
-    //   f_name: '',
-    //   m_name: '',
-    //   l_name: '',
-    //   phone: '',
-    // });
-
     setErrors({
       user_email: '',
       user_password: '',
@@ -131,11 +117,6 @@ function Signup() {
 
     return 1;
   };
-
-
-
-
-
 
   return (
     <Container>
