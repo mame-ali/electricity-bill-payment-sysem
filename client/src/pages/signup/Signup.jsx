@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import axios from '../../utility/axios';
 import { useNavigate } from 'react-router-dom';
+import "./signup.css"
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -119,144 +120,151 @@ function Signup() {
   };
 
   return (
-    <Container>
-      <Row className="justify-content-center mt-5">
-        <Col md={6}>
-          <h2 className="mb-4">Signup</h2>
-          <Form onSubmit={handleSubmit}>
-            <Row>
-              <Col>
-                <Form.Group controlId="f_name">
-                  <Form.Label>First Name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="First Name"
-                    name="f_name"
-                    value={formData.f_name}
-                    onChange={handleChange}
-                    required
-                    isInvalid={!!errors.f_name}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {errors.f_name}
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Col>
-              <Col>
-                <Form.Group controlId="m_name">
-                  <Form.Label>Middle Name</Form.Label>
-                  <Form.Control
-                    required
-                    type="text"
-                    placeholder="Middle Name"
-                    name="m_name"
-                    value={formData.m_name}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Form.Group controlId="l_name">
-                  <Form.Label>Last Name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Last Name"
-                    name="l_name"
-                    value={formData.l_name}
-                    onChange={handleChange}
-                    required
-                    isInvalid={!!errors.l_name}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {errors.l_name}
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Col>
-              <Col>
-                <Form.Group controlId="phone">
-                  <Form.Label>Phone</Form.Label>
-                  <Form.Control
-                    type="tel"
-                    placeholder="Phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    required
-                    isInvalid={!!errors.phone}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {errors.phone}
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Form.Group controlId="user_email">
-                  <Form.Label>Email address</Form.Label>
-                  <Form.Control
-                    type="email"
-                    placeholder="Enter email"
-                    name="user_email"
-                    value={formData.user_email}
-                    onChange={handleChange}
-                    required
-                    isInvalid={!!errors.user_email}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {errors.user_email}
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Col>
-              <Col>
-                <Form.Group controlId="user_password">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    placeholder="Password"
-                    name="user_password"
-                    value={formData.user_password}
-                    onChange={handleChange}
-                    required
-                    isInvalid={!!errors.user_password}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {errors.user_password}
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Form.Group controlId="confirm_password">
-                  <Form.Label>Confirm Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    placeholder="Confirm Password"
-                    name="confirm_password"
-                    value={formData.confirm_password}
-                    onChange={handleChange}
-                    required
-                    isInvalid={!!errors.confirm_password}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {errors.confirm_password}
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Col>
-              <Col>
-                <Button className="mt-3" variant="primary" type="submit">
-                  Signup
-                </Button>
-              </Col>
-            </Row>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
-  );
+		<Container className="large_container">
+			{/* <Row className=" custom-transparent-bg" style={{ minHeight: "538px" }}> */}
+			<Row className="custom-transparent-bg justify-content-center  text-white">
+				<Col md={6}>
+					<h2 className="mb-4">Signup</h2>
+					<Form onSubmit={handleSubmit}>
+						<Row>
+							<Col>
+								<Form.Group controlId="f_name">
+									<Form.Label>First Name</Form.Label>
+									<Form.Control
+										type="text"
+										placeholder="First Name"
+										name="f_name"
+										value={formData.f_name}
+										onChange={handleChange}
+										required
+										isInvalid={!!errors.f_name}
+									/>
+									<Form.Control.Feedback type="invalid">
+										{errors.f_name}
+									</Form.Control.Feedback>
+								</Form.Group>
+							</Col>
+							<Col>
+								<Form.Group controlId="m_name">
+									<Form.Label>Middle Name</Form.Label>
+									<Form.Control
+										required
+										type="text"
+										placeholder="Middle Name"
+										name="m_name"
+										value={formData.m_name}
+										onChange={handleChange}
+									/>
+								</Form.Group>
+							</Col>
+						</Row>
+						<Row>
+							<Col>
+								<Form.Group controlId="l_name">
+									<Form.Label>Last Name</Form.Label>
+									<Form.Control
+										type="text"
+										placeholder="Last Name"
+										name="l_name"
+										value={formData.l_name}
+										onChange={handleChange}
+										required
+										isInvalid={!!errors.l_name}
+									/>
+									<Form.Control.Feedback type="invalid">
+										{errors.l_name}
+									</Form.Control.Feedback>
+								</Form.Group>
+							</Col>
+							<Col>
+								<Form.Group controlId="phone">
+									<Form.Label>Phone</Form.Label>
+									<Form.Control
+										type="tel"
+										placeholder="Phone"
+										name="phone"
+										value={formData.phone}
+										onChange={handleChange}
+										required
+										isInvalid={!!errors.phone}
+									/>
+									<Form.Control.Feedback type="invalid">
+										{errors.phone}
+									</Form.Control.Feedback>
+								</Form.Group>
+							</Col>
+						</Row>
+						<Row>
+							<Col>
+								<Form.Group controlId="user_email">
+									<Form.Label>Email address</Form.Label>
+									<Form.Control
+										type="email"
+										placeholder="Enter email"
+										name="user_email"
+										value={formData.user_email}
+										onChange={handleChange}
+										required
+										isInvalid={!!errors.user_email}
+									/>
+									<Form.Control.Feedback type="invalid">
+										{errors.user_email}
+									</Form.Control.Feedback>
+								</Form.Group>
+							</Col>
+							<Col>
+								<Form.Group controlId="user_password">
+									<Form.Label>Password</Form.Label>
+									<Form.Control
+										type="password"
+										placeholder="Password"
+										name="user_password"
+										value={formData.user_password}
+										onChange={handleChange}
+										required
+										isInvalid={!!errors.user_password}
+									/>
+									<Form.Control.Feedback type="invalid">
+										{errors.user_password}
+									</Form.Control.Feedback>
+								</Form.Group>
+							</Col>
+						</Row>
+						<Row>
+							<Col>
+								<Form.Group controlId="confirm_password">
+									<Form.Label>Confirm Password</Form.Label>
+									<Form.Control
+										type="password"
+										placeholder="Confirm Password"
+										name="confirm_password"
+										value={formData.confirm_password}
+										onChange={handleChange}
+										required
+										isInvalid={!!errors.confirm_password}
+									/>
+									<Form.Control.Feedback type="invalid">
+										{errors.confirm_password}
+									</Form.Control.Feedback>
+								</Form.Group>
+							</Col>
+							<Col>
+								<Button
+									className="mt-3"
+									variant="primary"
+									type="submit"
+									style={{ backgroundColor: "#3D38B8" }}
+								>
+									Signup
+								</Button>
+							</Col>
+						</Row>
+					</Form>
+				</Col>
+			</Row>
+		</Container>
+	);
 }
 
 export default Signup;
+

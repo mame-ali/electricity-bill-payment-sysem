@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Routes,Route } from 'react-router-dom';
 import './App.css'
+import backgroundImg from "./resources/image/login-page-wallpapers.jpg";
+
 
 //pages 
 import Home from './pages/home/Home';
@@ -15,15 +17,22 @@ import Enterpassword from './pages/forgetpassword/Enterpassword';
 import Electric from './pages/electric/Electric';
 //componnet
 import  NavScrollExample from './components/navbar/CollapsibleExample';
+import "./App.css";
 
 import  Footer from './components/footer/Footer';
 import Users from './pages/users/Users';
 
 function App() {
   const [count, setCount] = useState(0)
+  const appStyle = {
+		backgroundImage: `url(${backgroundImg})`,
+		backgroundSize: "cover", 
+		backgroundRepeat: "no-repeat", 
+		minHeight: "700px", 
+	};
 
   return (
-    <>
+    <div style={appStyle}> 
       < NavScrollExample />
       <Routes>
         <Route path='/'  element={<Home />}/>
@@ -41,7 +50,7 @@ function App() {
       <Footer />
       
 
-    </>
+    </div>
   )
 }
 

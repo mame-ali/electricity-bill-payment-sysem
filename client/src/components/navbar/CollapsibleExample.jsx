@@ -8,6 +8,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import PersonIcon from '@mui/icons-material/Person';
 import { UserContext } from "../../context/UserContext";
+import "./navbar.css"
 
 
 function NavScrollExample() {
