@@ -56,8 +56,8 @@ function Login() {
 	};
 
 	return (
-		<Container className="custom-transparent-bg ">
-			<Row className="justify-content-center mt-5">
+		<Container className="large_container">
+			<Row className="custom-transparent-bg justify-content-center mt-5">
 				<Col md={6}>
 					<h2 className="mb-4">Login</h2>
 					<Form onSubmit={handleLogin} className="custom-form">

@@ -27,7 +27,7 @@ function App() {
 		backgroundImage: `url(${backgroundImg})`,
 		backgroundSize: "cover", 
 		backgroundRepeat: "no-repeat", 
-		minHeight: "1000px", 
+		minHeight: "700px", 
 	};
 
   return (

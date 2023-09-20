@@ -33,8 +33,11 @@ const ForgetPassword = () => {
   };
 
   return (
-		<Container className="custom-transparent-bg">
-			<Row className=" justify-content-center " style={{ minHeight: "300px" }}>
+		<Container className="large_container">
+			<Row
+				className="custom-transparent-bg justify-content-center "
+				style={{ minHeight: "300px" }}
+			>
 				<Col md={6}>
 					<h2 className="mt-5 text-white">Forgot Password</h2>
 					<Form onSubmit={handleSubmit}>

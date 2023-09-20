@@ -1,9 +1,20 @@
 .custom-transparent-bg {
    background-color: rgba(60, 128, 224, 0.7);
-  width: 100%; 
-   padding: 100px; 
-  margin-top: 100px;
+  max-width: 80%;
+  max-height: 500px;
+   padding-top: 60px; 
+   padding-bottom: 60px;
+   margin-left: 200px;
   border-radius: 10px; 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
   color: white;
+  align-items: center;
+  justify-content: center;
+}
+.large_container .custom-transparent-bg {
+  margin-left: 100px;
+   margin-top: 60px;
+}
+.large_container .col{
+  max-width: 100%;
 }

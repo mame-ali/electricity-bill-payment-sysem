@@ -120,9 +120,9 @@ function Signup() {
   };
 
   return (
-		<Container className="custom-transparent-bg" style={{ minHeight: "400px" }}>
+		<Container className="large_container">
 			{/* <Row className=" custom-transparent-bg" style={{ minHeight: "538px" }}> */}
-			<Row className="justify-content-center align-items-center mt-5 text-white">
+			<Row className="custom-transparent-bg justify-content-center  text-white">
 				<Col md={6}>
 					<h2 className="mb-4">Signup</h2>
 					<Form onSubmit={handleSubmit}>
