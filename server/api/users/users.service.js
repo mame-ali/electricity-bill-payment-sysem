@@ -49,6 +49,15 @@ const  userService = {
                 return callback(null, result);
             })
     },
+    //getUserBill
+     getUserBill: (data,callback) => { 
+         const getBillInfo = query.getBillInfo;
+         
+        connection.query(getBillInfo,[data],
+            (error, result, fields) => { 
+             if (error) {return callback(error);}
+                return callback(null, result);})
+    },
     //add user info
     addUserInfo: (data, callback) => { 
         const insertIntoUsersInfo = query.insertIntoUsersInfo;

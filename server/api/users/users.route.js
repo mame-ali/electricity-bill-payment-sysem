@@ -7,6 +7,7 @@ const usersRouter = express.Router();
 usersRouter.get('/users', userController.AllUser);
 usersRouter.get('/electricmeters', userController.AllElectricMeters);
 // usersRouter.get('//users/:id', userController.deleteUser);
+usersRouter.get('/bills/:user_id', userController.getUserBill);
 usersRouter.post('/createuser', userController.createUser);
 usersRouter.post('/confirmotp', userController.confirmOtp);
 usersRouter.post('/login', userController.login);

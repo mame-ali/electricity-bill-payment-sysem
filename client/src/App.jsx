@@ -7,7 +7,7 @@ import backgroundImg from "./resources/image/login-page-wallpapers.jpg";
 //pages 
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
-import Signup from './pages/signup/Signup';
+// import Signup from './pages/signup/Signup';
 import Profile from './pages/profile/Profile';
 import Four04 from './pages/404/404';
 import Forgetpassword from './pages/forgetpassword/Forgetpassword';
@@ -37,7 +37,7 @@ function App() {
       <Routes>
         <Route path='/'  element={<Home />}/>
         <Route path='/profile' element={<Profile />} />
-        <Route path='/signup' element={<Signup />} />
+        {/* <Route path='/signup' element={<Signup />} /> */}
         <Route path='/login' element={<Login />} />
         <Route path='/forgetpassword' element={<Forgetpassword />} />
         <Route path='/confirmotp' element={<ConfirmOtp  />} />

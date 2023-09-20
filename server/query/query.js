@@ -143,6 +143,9 @@ export default {
 FROM electric_meter
 JOIN electric_meter_address ON electric_meter.electric_meter_id = electric_meter_address.electric_meter_id;`
 
-
+  ,getBillInfo: `SELECT * FROM bills
+                JOIN electric_meter ON bills.electric_meter_id = electric_meter.electric_meter_id
+                JOIN users ON electric_meter.user_id = users.user_id
+                WHERE users.user_id = ?;`
 
 };

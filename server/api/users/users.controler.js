@@ -393,7 +393,21 @@ const userController = {
     });
      return res.status(200).json({ status: "sucess",msg:"electric meter deleted sucessfully" });      
 
-   },
+  },
+  //etUserBill
+  getUserBill: (req, res) => {
+    const user_id = req.params.id;
+    userService.getUserBill(user_id, (err, results) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({ msg: "database connection err" });
+      }
+     return res.status(200).json({ results });      
+     
+    });
+     
+
+  },
 
   // deleteUser: (req, res) => { 
   //    const user_id = req.params.id;
