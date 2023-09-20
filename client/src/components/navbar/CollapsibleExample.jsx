@@ -37,7 +37,10 @@ function NavScrollExample() {
             <Link to="/bill" className="nav-link">Bill</Link>
             <Link to="/bill-history" className="nav-link">Bill History</Link>
           </Nav>
+           <Link to="/electricmeter" className="nav-link me-5">Electric Meter</Link>
+            <Link to="/users" className="nav-link me-5">Users</Link>
           <div className='pe-5'>
+            
             {userData.user && <NavDropdown title={<PersonIcon />} id="navbarScrollingDropdown" className='pe-5'>
               <NavDropdown.Item as={Link} to="/profile">Profile</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/settings">Settings</NavDropdown.Item>

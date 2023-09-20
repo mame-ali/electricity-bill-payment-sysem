@@ -134,7 +134,14 @@ export default {
               JOIN meter_read AS m ON b.electric_meter_id = m.electric_meter_id
               JOIN users AS u ON e.user_id = u.user_id WHERE e.account_number = ?`
 
-
+ , getAllUsersData: `SELECT * FROM users
+        JOIN users_info ON users.user_id = users_info.user_id
+        JOIN users_role ON users.user_id = users_role.user_id
+        JOIN users_profile ON users.user_id = users_profile.user_id
+        ORDER BY users.user_id;`,
+ getAllElectricMeterData:  `SELECT *
+FROM electric_meter
+JOIN electric_meter_address ON electric_meter.electric_meter_id = electric_meter_address.electric_meter_id;`
 
 
 

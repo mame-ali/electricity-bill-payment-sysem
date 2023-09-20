@@ -12,11 +12,12 @@ import Forgetpassword from './pages/forgetpassword/Forgetpassword';
 import ConfirmOtp from './pages/forgetpassword/ConfirmOtp';
 import Enterpassword from './pages/forgetpassword/Enterpassword';
 
-
+import Electric from './pages/electric/Electric';
 //componnet
 import  NavScrollExample from './components/navbar/CollapsibleExample';
 
-
+import  Footer from './components/footer/Footer';
+import Users from './pages/users/Users';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -31,10 +32,13 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/forgetpassword' element={<Forgetpassword />} />
         <Route path='/confirmotp' element={<ConfirmOtp  />} />
-          <Route path='/enterpassword' element={<Enterpassword/>} />
-      
+        <Route path='/enterpassword' element={<Enterpassword />} />
+        <Route path='/electricmeter' element={<Electric />} />
+         <Route path='/users' element={<Users />} />
+    
          <Route path='/*'  element={<Four04 />}/>
       </Routes>
+      <Footer />
       
 
     </>

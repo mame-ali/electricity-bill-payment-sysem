@@ -1,0 +1,29 @@
+
+  @import url('https://fonts.googleapis.com/css2?family=Croissant+One&display=swap');
+
+
+.Home{
+    background-image: url(../../assets/images/package-3.jpg) ;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Croissant One', cursive;
+    
+}
+.Home .bleer {
+    background-color: rgba(0, 0, 0, 0.27);
+}
+.centerTable{
+  margin: 0 auto;
+  width: 1000px;
+  display: flex;
+   align-items: center;
+  justify-content: center;
+  
+}
+.centercontent{
+  margin: 0 auto;
+  text-align: center;
+  margin: 20px;
+  
+}

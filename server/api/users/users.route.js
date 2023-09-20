@@ -4,7 +4,9 @@ import auth from '../../auth/auth.js';
 import userController from './users.controler.js';
 //import { upload } from '../../config/multer.js';
 const usersRouter = express.Router();
-
+usersRouter.get('/users', userController.AllUser);
+usersRouter.get('/electricmeters', userController.AllElectricMeters);
+// usersRouter.get('//users/:id', userController.deleteUser);
 usersRouter.post('/createuser', userController.createUser);
 usersRouter.post('/confirmotp', userController.confirmOtp);
 usersRouter.post('/login', userController.login);

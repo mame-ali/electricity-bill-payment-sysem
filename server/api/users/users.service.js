@@ -29,6 +29,26 @@ const  userService = {
                 return callback(null, result);
             })
     },
+    //get All Users Data
+    getAllusersInfo: (callback) => { 
+        const getAllUsersData = query.getAllUsersData;
+        connection.query(getAllUsersData,
+           
+            (error, result, fields) => { 
+             if (error) {return callback(error);}
+                return callback(null, result);
+            })
+    },
+    //getAllElectricMeterData
+     getAllElectricMeterInfo: (callback) => { 
+        const getAllElectricMeterData = query.getAllElectricMeterData;
+        connection.query(getAllElectricMeterData,
+           
+            (error, result, fields) => { 
+             if (error) {return callback(error);}
+                return callback(null, result);
+            })
+    },
     //add user info
     addUserInfo: (data, callback) => { 
         const insertIntoUsersInfo = query.insertIntoUsersInfo;

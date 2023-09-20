@@ -91,6 +91,34 @@ const userController = {
 
   },
 
+  // all users list 
+  AllUser: (req, res) => { 
+    userService.getAllusersInfo(
+      (err, results) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).json({ msg: "database connection err during  email checking", });
+        }
+        res.status(200).json({ results });
+      }
+    )
+
+  },
+
+    // all electric meter list 
+  AllElectricMeters: (req, res) => { 
+    userService.getAllElectricMeterInfo(
+      (err, results) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).json({ msg: "database connection err during  email checking", });
+        }
+        res.status(200).json({ results });
+      }
+    )
+
+  },
+
   // confirm OTP
   confirmOtp: (req, res) => {
     const { user_email, otp } = req.body;
@@ -367,6 +395,23 @@ const userController = {
 
    },
 
+  // deleteUser: (req, res) => { 
+  //    const user_id = req.params.id;
+  //   userService.deleteUserAddress(user_id, (err, results) => {
+  //     if (err) {
+  //       console.log(err);
+  //       return res.status(500).json({ msg: "database connection err" });
+  //     }
+  //     userService.deleteElectricMeter(user_id, (err, results) => {
+  //       if (err) {
+  //         console.log(err);
+  //         return res.status(500).json({ msg: "database connection err" });
+  //       }
+  //     })
+  //   });
+  //    return res.status(200).json({ status: "sucess",msg:"electric meter deleted sucessfully" });      
+
+  // }
 
 
 
