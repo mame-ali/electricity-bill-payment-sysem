@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { Routes,Route } from 'react-router-dom';
-import './App.css'
+import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import "./App.css";
 import backgroundImg from "./resources/image/login-page-wallpapers.jpg";
 
-
+//pages
 //pages 
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
@@ -18,21 +18,23 @@ import Enterpassword from './pages/forgetpassword/Enterpassword';
 
 import Electric from './pages/electric/Electric';
 //componnet
-import  NavScrollExample from './components/navbar/CollapsibleExample';
+import NavScrollExample from "./components/navbar/CollapsibleExample";
 import "./App.css";
 
-import  Footer from './components/footer/Footer';
+
 import Users from './pages/users/Users';
 import AddElectricMeter from './pages/add/AddElectricMeter';
 import Read from './pages/read/Read';
+import Footer from "./components/footer/Footer";
+import Services from "./components/services/ServicesList";
 
 function App() {
-  const [count, setCount] = useState(0)
-  const appStyle = {
+	const [count, setCount] = useState(0);
+	const appStyle = {
 		backgroundImage: `url(${backgroundImg})`,
-		backgroundSize: "cover", 
-		backgroundRepeat: "no-repeat", 
-		minHeight: "700px", 
+		backgroundSize: "cover",
+		backgroundRepeat: "no-repeat",
+		minHeight: "700px",
 	};
 
   return (
@@ -55,13 +57,11 @@ function App() {
         <Route path='/read' element={ <Read />} />
    
    
-         <Route path='/*'  element={<Four04 />}/>
+        <Route path='/*'  element={<Four04 />}/>
       </Routes>
       <Footer />
-      
-
-    </div>
+		</div>
   )
 }
 
-export default App
+export default App;

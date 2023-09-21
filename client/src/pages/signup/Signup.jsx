@@ -1,47 +1,47 @@
-import React, { useState } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import axios from '../../utility/axios';
-import { useNavigate } from 'react-router-dom';
-import "./signup.css"
+import React, { useState } from "react";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import axios from "../../utility/axios";
+import { useNavigate } from "react-router-dom";
+import "./signup.css";
 
 function Signup() {
-  const [formData, setFormData] = useState({
-    user_email: '',
-    user_password: '',
-    confirm_password: '',
-    f_name: '',
-    m_name: '',
-    l_name: '',
-    phone: '',
-  });
+	const [formData, setFormData] = useState({
+		user_email: "",
+		user_password: "",
+		confirm_password: "",
+		f_name: "",
+		m_name: "",
+		l_name: "",
+		phone: "",
+	});
 
-  const navigate3 = useNavigate();
+	const navigate3 = useNavigate();
 
-  const [errors, setErrors] = useState({
-    user_email: '',
-    user_password: '',
-    confirm_password: '',
-    f_name: '',
-    m_name: '',
-    l_name: '',
-    phone: '',
-  });
+	const [errors, setErrors] = useState({
+		user_email: "",
+		user_password: "",
+		confirm_password: "",
+		f_name: "",
+		m_name: "",
+		l_name: "",
+		phone: "",
+	});
 
-  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-  const nameRegex = /^[A-Za-z]+$/;
-  const phoneRegex = /^(?:\+251|0)[1-9]\d{8}$/;
+	const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+	const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+	const nameRegex = /^[A-Za-z]+$/;
+	const phoneRegex = /^(?:\+251|0)[1-9]\d{8}$/;
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		setFormData({
+			...formData,
+			[name]: value,
+		});
+	};
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+	const handleSubmit = async (e) => {
+		e.preventDefault();
 
     if (formvalidation()) {
       try {
@@ -58,68 +58,68 @@ function Signup() {
     }
   };
 
-  const formvalidation = () => {
-    // Validate email format
-    if (!emailRegex.test(formData.user_email)) {
-      setErrors({
-        ...errors,
-        user_email: 'Invalid email format',
-      });
-      return;
-    }
+	const formvalidation = () => {
+		// Validate email format
+		if (!emailRegex.test(formData.user_email)) {
+			setErrors({
+				...errors,
+				user_email: "Invalid email format",
+			});
+			return;
+		}
 
-    // Validate password match
-    if (formData.user_password !== formData.confirm_password) {
-      setErrors({
-        ...errors,
-        confirm_password: 'Passwords do not match',
-      });
-      return;
-    }
+		// Validate password match
+		if (formData.user_password !== formData.confirm_password) {
+			setErrors({
+				...errors,
+				confirm_password: "Passwords do not match",
+			});
+			return;
+		}
 
-    // Validate name fields
-    if (!nameRegex.test(formData.f_name)) {
-      setErrors({
-        ...errors,
-        f_name: 'Invalid first name format',
-      });
-      return;
-    }
+		// Validate name fields
+		if (!nameRegex.test(formData.f_name)) {
+			setErrors({
+				...errors,
+				f_name: "Invalid first name format",
+			});
+			return;
+		}
 
-    if (!nameRegex.test(formData.l_name)) {
-      setErrors({
-        ...errors,
-        l_name: 'Invalid last name format',
-      });
-      return;
-    }
+		if (!nameRegex.test(formData.l_name)) {
+			setErrors({
+				...errors,
+				l_name: "Invalid last name format",
+			});
+			return;
+		}
 
-    // Validate phone field
-    if (!phoneRegex.test(formData.phone)) {
-      setErrors({
-        ...errors,
-        phone: 'Invalid phone number format (10 digits)',
-      });
-      return;
-    }
+		// Validate phone field
+		if (!phoneRegex.test(formData.phone)) {
+			setErrors({
+				...errors,
+				phone: "Invalid phone number format (10 digits)",
+			});
+			return;
+		}
 
-    // If validation passes, you can proceed with registration logic here
+		// If validation passes, you can proceed with registration logic here
 
-    // Reset the form after successful registration or handle registration errors.
-    setErrors({
-      user_email: '',
-      user_password: '',
-      confirm_password: '',
-      f_name: '',
-      m_name: '',
-      l_name: '',
-      phone: '',
-    });
+		// Reset the form after successful registration or handle registration errors.
+		setErrors({
+			user_email: "",
+			user_password: "",
+			confirm_password: "",
+			f_name: "",
+			m_name: "",
+			l_name: "",
+			phone: "",
+		});
 
-    return 1;
-  };
+		return 1;
+	};
 
-  return (
+	return (
 		<Container className="large_container">
 			{/* <Row className=" custom-transparent-bg" style={{ minHeight: "538px" }}> */}
 			<Row className="custom-transparent-bg justify-content-center  text-white">
@@ -267,4 +267,3 @@ function Signup() {
 }
 
 export default Signup;
-

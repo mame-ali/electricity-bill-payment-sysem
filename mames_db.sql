@@ -105,3 +105,6 @@ drop TABLE bills , electric_meter,electric_meter_address,
 meter_read,org_role,
 users, users_info,
 users_password,users_profile,users_role;
+
+INSERT INTO org_role (org_role_name)
+VALUES ('normal'),('reader'),('admin');

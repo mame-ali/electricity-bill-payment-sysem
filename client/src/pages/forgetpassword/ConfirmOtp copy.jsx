@@ -25,7 +25,7 @@ const handleSubmit = async (e) => {
   };
 
   try {
-    const response = await axios.post('users/confirmotpSecond', formData);
+    const response = await axios.post('users/confirmotp', formData);
     alert(response.data.msg);
     navigate3('/login'); // Pass the email to the next component
   } catch (error) {
