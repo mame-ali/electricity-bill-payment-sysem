@@ -8,11 +8,12 @@ import backgroundImg from "./resources/image/login-page-wallpapers.jpg";
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
 import Bill from './pages/bill/Bill';
-// import Signup from './pages/signup/Signup';
+import Signup from './pages/signup/Signup';
 import Profile from './pages/profile/Profile';
 import Four04 from './pages/404/404';
 import Forgetpassword from './pages/forgetpassword/Forgetpassword';
 import ConfirmOtp from './pages/forgetpassword/ConfirmOtp';
+import ConfirmOtpSecond  from './pages/forgetpassword/ConfirmOtp copy';
 import Enterpassword from './pages/forgetpassword/Enterpassword';
 
 import Electric from './pages/electric/Electric';
@@ -22,6 +23,8 @@ import "./App.css";
 
 import  Footer from './components/footer/Footer';
 import Users from './pages/users/Users';
+import AddElectricMeter from './pages/add/AddElectricMeter';
+import Read from './pages/read/Read';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -38,14 +41,18 @@ function App() {
       <Routes>
         <Route path='/'  element={<Home />}/>
         <Route path='/profile' element={<Profile />} />
-        {/* <Route path='/signup' element={<Signup />} /> */}
+        <Route path='/signup' element={<Signup />} />
         <Route path='/login' element={<Login />} />
         <Route path='/forgetpassword' element={<Forgetpassword />} />
+        
+          <Route path='/confirmotpsecond' element={<ConfirmOtpSecond />} />
         <Route path='/confirmotp' element={<ConfirmOtp  />} />
         <Route path='/enterpassword' element={<Enterpassword />} />
         <Route path='/electricmeter' element={<Electric />} />
         <Route path='/users' element={<Users />} />
         <Route path='/bills' element={<Bill />} />
+        <Route path='/addelectricmeter' element={<><AddElectricMeter /></>} />
+        <Route path='/read' element={ <Read />} />
    
    
          <Route path='/*'  element={<Four04 />}/>

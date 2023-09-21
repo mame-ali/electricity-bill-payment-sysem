@@ -86,15 +86,16 @@ export default {
   );`,
   
   billsTableCreate: `CREATE TABLE IF NOT EXISTS bills (
-    bill_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    electric_meter_id INT NOT NULL,
-    bill_month VARCHAR(255) NOT NULL,
-    bill_status INT NOT NULL,
-    ec_range INT NOT NULL,
-    bill_amount DECIMAL(10, 2) NOT NULL,
-    FOREIGN KEY (electric_meter_id)
-      REFERENCES electric_meter (electric_meter_id)
-  );`,
+  bill_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  electric_meter_id INT NOT NULL,
+  bill_month VARCHAR(255) NOT NULL,
+  bill_status INT NOT NULL,
+  ec_range BIGINT NOT NULL,
+  bill_amount DECIMAL(10, 2) NOT NULL,
+  FOREIGN KEY (electric_meter_id)
+    REFERENCES electric_meter (electric_meter_id)
+);
+`,
 
   getUserByEmail: `select * from users WHERE USER_email=?;`,
   getOTPByEmail: `select * from users WHERE USER_email=? and otp =?;`,
@@ -137,7 +138,6 @@ export default {
  , getAllUsersData: `SELECT * FROM users
         JOIN users_info ON users.user_id = users_info.user_id
         JOIN users_role ON users.user_id = users_role.user_id
-        JOIN users_profile ON users.user_id = users_profile.user_id
         ORDER BY users.user_id;`,
  getAllElectricMeterData:  `SELECT *
 FROM electric_meter
@@ -146,6 +146,17 @@ JOIN electric_meter_address ON electric_meter.electric_meter_id = electric_meter
   ,getBillInfo: `SELECT * FROM bills
                 JOIN electric_meter ON bills.electric_meter_id = electric_meter.electric_meter_id
                 JOIN users ON electric_meter.user_id = users.user_id
-                WHERE users.user_id = ?;`
+                WHERE users.user_id = ?;`,
+  insertRole: `INSERT INTO org_role (org_role_name) VALUES ('normal'),('reader'),('admin');`,
+
+  getAccout: `select account_number from electric_meter`,
+  getelectric_meterbyAccount: `select electric_meter_id from electric_meter where account_number =? `,
+  insertIntoRead: `INSERT INTO meter_read (electric_meter_id, user_id, read_data, month, read_date)VALUES (?, ?, ?, ?, Now());`,
+  insertBill:  `INSERT INTO bills (electric_meter_id, bill_month, bill_status, ec_range, bill_amount)
+                VALUES (?, ?, 1, ?, ?);`,
+  
+  getPrevElectricMeter: `SELECT  month, read_data FROM meter_read WHERE   electric_meter_id=? ORDER BY read_date DESC;`,
+  
+  
 
 };

@@ -29,6 +29,20 @@ const  userService = {
                 return callback(null, result);
             })
     },
+    //assignRole
+    // assignRole: (data, callback) => { 
+    //     const insertIntoUsersrole = query.insertIntoUsersrole;
+    //     connection.query(insertIntoUsersrole,
+    //         [
+    //             2, 
+    //             data.user_id,
+               
+    //         ],
+    //         (error, result, fields) => { 
+    //          if (error) {return callback(error);}
+    //             return callback(null, result);
+    //         })
+    // },
     //get All Users Data
     getAllusersInfo: (callback) => { 
         const getAllUsersData = query.getAllUsersData;
@@ -39,6 +53,41 @@ const  userService = {
                 return callback(null, result);
             })
     },
+    getAllMeterRead: (callback) => { 
+        const getAccout = query.getAccout;
+        connection.query(getAccout,
+           
+            (error, result, fields) => { 
+             if (error) {return callback(error);}
+                return callback(null, result);
+            })
+    },
+        //getAllusersbyAccount
+     getAllusersbyAccount: (data,callback) => { 
+        const getelectric_meterbyAccount = query.getelectric_meterbyAccount;
+         connection.query(getelectric_meterbyAccount, [data],
+           
+             (error, result, fields) => {
+                 if (error) { return callback(error); }
+                 return callback(null, result);
+             });
+    },
+    //insertIntoRead
+     insertIntoRead: (data,callback) => { 
+        const insertIntoRead = query.insertIntoRead;
+         connection.query(insertIntoRead, [
+             data.electric_meter_id,
+             data.user_id,
+             data.read_data,
+             data.month
+         ],
+           
+             (error, result, fields) => {
+                 if (error) { return callback(error); }
+                 return callback(null, result);
+             });
+    },
+        
     //getAllElectricMeterData
      getAllElectricMeterInfo: (callback) => { 
         const getAllElectricMeterData = query.getAllElectricMeterData;
@@ -57,6 +106,31 @@ const  userService = {
             (error, result, fields) => { 
              if (error) {return callback(error);}
                 return callback(null, result);})
+    },
+     
+    getPrevBillInfo: (data, callback) => { 
+        console.log(`----------${data}`);
+        const getPrevElectricMeter = query.getPrevElectricMeter;
+        
+    connection.query(getPrevElectricMeter,[data],
+        (error, result, fields) => { 
+            if (error) {return callback(error);}
+            return callback(null, result);})
+    },
+       
+    //InsertBill
+    InsertBill: (data, callback) => { 
+       
+        const insertBill = query.insertBill;
+        connection.query(insertBill, [
+            data.electric_meter_id,
+            data.month,
+            data.range,
+            data.bill_amount
+        ],
+        (error, result, fields) => { 
+            if (error) {return callback(error);}
+            return callback(null, result);})
     },
     //add user info
     addUserInfo: (data, callback) => { 
@@ -192,9 +266,9 @@ const  userService = {
         const updateUserRole = query.updateUserRole;
         connection.query(updateUserRole,
             [
-              
-            data.user_id,
-             data.org_role_id
+               data.org_role_id,
+            data.user_id
+            
             ],
             (error, result, fields) => { 
              if (error) {return callback(error);}

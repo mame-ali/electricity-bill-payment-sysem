@@ -4,7 +4,7 @@ import React, { useContext,useState } from 'react';
 import axios from '../../utility/axios';
 import { UserContext } from "../../context/UserContext";
 import { useNavigate } from 'react-router-dom';
-const ConfirmOtp = () => {
+const ConfirmOtpSecond = () => {
 
   const [otp, setOtp] = useState('');
   const location = useLocation();
@@ -25,9 +25,9 @@ const handleSubmit = async (e) => {
   };
 
   try {
-    const response = await axios.post('users/confirmotp', formData);
+    const response = await axios.post('users/confirmotpSecond', formData);
     alert(response.data.msg);
-    navigate3('/enterpassword', { state: { email } }); // Pass the email to the next component
+    navigate3('/login'); // Pass the email to the next component
   } catch (error) {
     alert(error.response.data.msg);
     console.log(error);
@@ -66,4 +66,4 @@ const handleSubmit = async (e) => {
   );
 };
 
-export default ConfirmOtp;
+export default ConfirmOtpSecond;

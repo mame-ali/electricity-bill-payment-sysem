@@ -19,7 +19,7 @@ const ForgetPassword = () => {
       user_email: email
     }
    try { 
-       const response = await axios.post('/api/users/forgetpassword', formData);
+       const response = await axios.post('users/forgetpassword', formData);
        // console.log(response);
       alert(response.data.msg);
      // localStorage.setItem("auth-token", loginRes.data.token);

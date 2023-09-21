@@ -91,6 +91,84 @@ const userController = {
 
   },
 
+  insertReadData: (req, res) => { 
+
+    userService.getAllusersbyAccount(req.body.account_number,
+      (err, results) => {
+        
+        if (err) {
+          console.log(err);
+          return res.status(500).json({ msg: "database connection err during  email checking", });
+        }
+        req.body.electric_meter_id = results[0].electric_meter_id; 
+        const ggg = results[0].electric_meter_id;
+        userService.insertIntoRead(req.body,
+        (err, results) => {
+          if (err) {
+            console.log(err);
+            return res.status(500).json({ msg: "database connection err during  email checking", });
+          }
+          // calculatebill(req.body);
+          ///----------------Bill calcu-------------------------///
+
+      
+          userService.getPrevBillInfo(req.body.electric_meter_id, (err, results2) => {
+
+            if (err) {
+              console.log(err);
+              return res.status(500).json({ msg: "database connection err" });
+            }
+            if (!results2) { 
+              return res.status(200).json({msg: "first read " , status: "success"});
+            }
+            console.log(results2[1]);
+            const electric_meter_id = req.body.electric_meter_id;
+            const { read_data, month } = results2[1];
+            console.log(month)
+            const range = parseInt(req.body.read_data) - parseInt(read_data);
+            const bill_amount = 2 * range;
+            const formdata = {
+              electric_meter_id,
+              range,
+              bill_amount,
+              month
+            }
+             userService.InsertBill(formdata,
+                (err, results) => {
+                  if (err) {
+                    console.log(err);
+                    return res.status(500).json({ msg: "database connection err during  email checking", });
+                  }
+                 console.log(results);
+                }
+              )
+  
+          });
+          
+
+
+          res.status(200).json({ status:"success", msg: "read data inserted sucessfully" });
+        }
+      )
+      }
+    )
+
+  },
+
+  //assignRole
+  // assignRole: (req, res) => { 
+  //   const { id } = req.body;
+  //   userService.assignRole( id,
+  //     (err, results) => {
+  //       if (err) {
+  //         console.log(err);
+  //         return res.status(500).json({ msg: "database connection err during  email checking", });
+  //       }
+  //       res.status(200).json({ results });
+  //     }
+  //   )
+
+  // },
   // all users list 
   AllUser: (req, res) => { 
     userService.getAllusersInfo(
@@ -104,7 +182,18 @@ const userController = {
     )
 
   },
-
+  //AllMetersRead
+  AllMetersRead: (req, res) => {
+    userService.getAllMeterRead(
+      (err, results) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).json({ msg: "database connection err during  email checking", });
+        }
+        res.status(200).json({ results });
+      }
+    )
+   },
     // all electric meter list 
   AllElectricMeters: (req, res) => { 
     userService.getAllElectricMeterInfo(
@@ -315,13 +404,15 @@ const userController = {
   
   // asign role 
   updateUserRole: (req, res) => { 
+    console.log(req.body);
     const { user_id, org_role_id } = req.body;
     // console.log(req.body);
      userService.updateRole(req.body, (err, results) => {
       if (err) {
         console.log(err);
         return res.status(500).json({ msg: "database connection err" });
-      }
+       }
+       console.log(results);
       return res.status(200).json({ status: "sucess",msg:"role updated sucessfully" });
     });
 
@@ -489,4 +580,14 @@ const sendEmail = async (user_email, v_code) => {
     console.error("Error sending email:", error);
     throw error;
   }
+};
+
+
+//----------------------------------------------------//
+
+const calculatebill = (data)=> { 
+  const {electric_meter_id,month,read_data  } = data;
+
+
+
 };

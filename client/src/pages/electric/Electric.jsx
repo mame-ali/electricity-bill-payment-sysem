@@ -1,6 +1,7 @@
 import React, { useState} from 'react'
 import DataTable from '../../components/dataTable/DataTable';
 import Add from '../../components/add/Add'
+import { Link } from 'react-router-dom';
 
 const Electric = () => {
   const [open, setOpen] = useState(false);
@@ -17,7 +18,7 @@ const Electric = () => {
 
       <div className="info centercontent">
       <h1>Electric</h1>
-        <button className="btn btn-primary" onClick={handleAddUserClick}>Add New User</button>
+        <Link to='/addelectricmeter' className="btn btn-primary">Add New User</Link>
       </div>
       <DataTable first="users/electricmeters" />
          {open &&<Add name= 'users' columns={columns} setOpen={setOpen} />}

@@ -45,12 +45,12 @@ function Signup() {
 
     if (formvalidation()) {
       try {
-        const response = await axios.post('/api/users/createuser', formData);
+        const response = await axios.post('users/createuser', formData);
         console.log(response);
         alert(response.data.msg);
 
         // Pass the email to the next component
-        navigate3('/confirmotp', { state: { email: formData.user_email } });
+        navigate3('/confirmotpsecond', { state: { email: formData.user_email } });
       } catch (error) {
         alert(error.response.data.msg);
         console.log(error);

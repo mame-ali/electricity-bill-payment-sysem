@@ -49,7 +49,7 @@ const [deleted, setDeleted] = useState(false);
             View
           </div>
           <div className="deleteButton btn btn-danger" onClick={onClickDelete}>
-            Delete
+            updateUser
           </div>
         </div>
       );
@@ -69,19 +69,15 @@ const [deleted, setDeleted] = useState(false);
       }
     };
 
-  const handleDelete = (id) => {
-    const confirmed = window.confirm(`Are you sure? \n you want to delete ${first}`);
+    const handleDelete = async (id) => {
+      const data = {
+        user_id: id,
+        org_role_id: 2      };
+    const confirmed = window.confirm(`Are you sure? \n you want to  update ${first}`);
     if (confirmed) {
-      axios
-        .delete(`${first}/${id}`)
-        .then((response) => {
-          alert(response.data);
-          setDeleted(true); // Set deleted to true to trigger a state update
-        })
-        .catch((error) => {
-          alert(error);
-          console.error(error);
-        });
+      const response = await axios.put('users/assignrole', data);
+      console.log(response);
+     
     } else {
       alert('delete canceled');
     }

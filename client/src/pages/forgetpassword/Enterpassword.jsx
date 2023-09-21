@@ -58,7 +58,7 @@ const Enterpassword = () => {
     console.log(formData2);
 
     try {
-      const response = await axios.post('/api/users/changePassword', formData2);
+      const response = await axios.post('users/changePassword', formData2);
       alert(response.data.msg);
       navigate3('/login');
     } catch (error) {
