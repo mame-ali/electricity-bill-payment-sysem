@@ -35,7 +35,7 @@ function NavScrollExample() {
           >
             <Link to="/" className="nav-link">Home</Link>
             <Link to="/news" className="nav-link">News</Link>
-            <Link to="/bill" className="nav-link">Bill</Link>
+            <Link to="/bills" className="nav-link">Bill</Link>
             <Link to="/bill-history" className="nav-link">Bill History</Link>
           </Nav>
            <Link to="/electricmeter" className="nav-link me-5">Electric Meter</Link>

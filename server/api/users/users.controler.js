@@ -396,7 +396,7 @@ const userController = {
   },
   //etUserBill
   getUserBill: (req, res) => {
-    const user_id = req.params.id;
+    const user_id = req.params.user_id;
     userService.getUserBill(user_id, (err, results) => {
       if (err) {
         console.log(err);

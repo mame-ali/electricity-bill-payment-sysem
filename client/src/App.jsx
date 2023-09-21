@@ -7,6 +7,7 @@ import backgroundImg from "./resources/image/login-page-wallpapers.jpg";
 //pages 
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
+import Bill from './pages/bill/Bill';
 // import Signup from './pages/signup/Signup';
 import Profile from './pages/profile/Profile';
 import Four04 from './pages/404/404';
@@ -43,8 +44,10 @@ function App() {
         <Route path='/confirmotp' element={<ConfirmOtp  />} />
         <Route path='/enterpassword' element={<Enterpassword />} />
         <Route path='/electricmeter' element={<Electric />} />
-         <Route path='/users' element={<Users />} />
-    
+        <Route path='/users' element={<Users />} />
+        <Route path='/bills' element={<Bill />} />
+   
+   
          <Route path='/*'  element={<Four04 />}/>
       </Routes>
       <Footer />

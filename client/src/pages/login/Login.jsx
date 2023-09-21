@@ -41,7 +41,8 @@ function Login() {
 		};
 
 		try {
-			const response = await axios.post("/api/users/login", formData);
+			const response = await axios.post("/users/login", formData);
+			console.log(response)
 			alert(response.data.msg);
 			setUserData({
 				token: response.data.token,
