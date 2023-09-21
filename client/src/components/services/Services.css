@@ -1,0 +1,47 @@
+.utility {
+	align-items: center;
+
+	margin-top: 20px;
+	width: 400px;
+	height: 500px;
+}
+.utility:hover {
+	transform: scale(1.03);
+}
+.utility__image {
+	width: 100%;
+	height: 200px;
+}
+.utility__info {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+}
+.utility__title {
+	font-size: 27px;
+	font-weight: bold;
+}
+.utility__description {
+	font-size: 20px;
+}
+.button__wrapper {
+	margin-top: 10px;
+
+	border-radius: 2%;
+}
+.learn__more__btn {
+	background: rgb(93, 6, 130);
+	color: white;
+	border-radius: 0.2vw;
+	cursor: pointer;
+}
+.learn__more__btn:hover {
+	color: green;
+	transition: 0.2s;
+}
+.utility {
+	padding-right: 5px;
+	padding-left: 5px;
+}

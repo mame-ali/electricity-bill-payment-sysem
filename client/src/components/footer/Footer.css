@@ -1,0 +1,55 @@
+.footer-quick-links {
+	display: flex;
+	justify-content: space-between;
+}
+.outer__wrapper {
+	background: rgb(51, 51, 51);
+	padding: 20px 5px;
+}
+
+.footer-quick-links li,
+#social-media li {
+	list-style: none;
+	color: white;
+}
+
+.footer-quick-links a {
+	text-decoration: none;
+	color: #21a7dc;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.footer-quick-links .social-media li {
+	display: flex;
+	align-items: center;
+	margin: 5px 10px;
+}
+
+#social-media em {
+	margin-right: 5px;
+}
+.container-fluid {
+	background-color: rgb(243, 243, 243);
+	margin: 25px 20px;
+}
+.inner__wrapper {
+	display: flex;
+	justify-content: space-between;
+}
+.social__media img {
+	width: 30px;
+	height: 30px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+/* .social__media li a.youtube__icon {
+	width: 100px;
+	height: 100px;
+} */
+.social__media li {
+	display: inline-block;
+	justify-content: space-between;
+
+	list-style: none;
+}
