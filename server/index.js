@@ -56,6 +56,30 @@ server.post("/payments/create", async (req, res) => {
 });
 
 
+
+//logout
+server.get('/api/users/logout',(req, res)=> {
+  res.clearCookie('token')
+  return res.json({status: 'success'})
+})
+//check login status
+const verifyUser = (req,res,next) => { 
+  const token = req.cookies.token;
+  if (!token) {
+    return res.json({ message: "no token, so logout" });
+  }
+  else { 
+    jwt.verify(token, 'zerubabel-secret-key', (error, decode) => { 
+      if (error) { return res.json({ message: 'authentication error' }); }
+      else {
+        req.username = decode.username;
+        next();
+      }
+    });
+  }
+};
+
+
 // testing API
 server.get('/', (req, res) => { 
     res.send("<h1>working ..... </h1>")
