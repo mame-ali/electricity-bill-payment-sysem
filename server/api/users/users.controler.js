@@ -91,69 +91,59 @@ const userController = {
 
   },
 
-  insertReadData: (req, res) => { 
+insertReadData: (req, res) => {
+  userService.getAllusersbyAccount(req.body.account_number, (err, results) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ msg: "database connection err during email checking" });
+    }
 
-    userService.getAllusersbyAccount(req.body.account_number,
-      (err, results) => {
-        
+    req.body.electric_meter_id = results[0].electric_meter_id;
+    const ggg = results[0].electric_meter_id;
+
+    userService.insertIntoRead(req.body, (err, results) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({ msg: "database connection err during email checking" });
+      }
+
+      userService.getPrevBillInfo(req.body.electric_meter_id, (err, results2) => {
         if (err) {
           console.log(err);
-          return res.status(500).json({ msg: "database connection err during  email checking", });
+          return res.status(500).json({ msg: "database connection err" });
         }
-        req.body.electric_meter_id = results[0].electric_meter_id; 
-        const ggg = results[0].electric_meter_id;
-        userService.insertIntoRead(req.body,
-        (err, results) => {
-          if (err) {
-            console.log(err);
-            return res.status(500).json({ msg: "database connection err during  email checking", });
-          }
-          // calculatebill(req.body);
-          ///----------------Bill calcu-------------------------///
 
-      
-          userService.getPrevBillInfo(req.body.electric_meter_id, (err, results2) => {
+        if (!results2.length) {
+          console.log(results2[1]);
+          return res.status(200).json({ msg: "first read", status: "success" });
+        } else {
+          const electric_meter_id = req.body.electric_meter_id;
+          const { read_data, month } = results2[1];
+          console.log(month);
+          const range = parseInt(req.body.read_data) - parseInt(read_data);
+          const bill_amount = 2 * range;
+          const formdata = {
+            electric_meter_id,
+            range,
+            bill_amount,
+            month
+          };
 
+          userService.InsertBill(formdata, (err, results) => {
             if (err) {
               console.log(err);
-              return res.status(500).json({ msg: "database connection err" });
+              return res.status(500).json({ msg: "database connection err during email checking" });
             }
-            if (!results2) { 
-              return res.status(200).json({msg: "first read " , status: "success"});
-            }
-            console.log(results2[1]);
-            const electric_meter_id = req.body.electric_meter_id;
-            const { read_data, month } = results2[1];
-            console.log(month)
-            const range = parseInt(req.body.read_data) - parseInt(read_data);
-            const bill_amount = 2 * range;
-            const formdata = {
-              electric_meter_id,
-              range,
-              bill_amount,
-              month
-            }
-             userService.InsertBill(formdata,
-                (err, results) => {
-                  if (err) {
-                    console.log(err);
-                    return res.status(500).json({ msg: "database connection err during  email checking", });
-                  }
-                 console.log(results);
-                }
-              )
-  
+
+            console.log(results);
+            res.status(200).json({ status: "success", msg: "read data inserted successfully" });
           });
-          
-
-
-          res.status(200).json({ status:"success", msg: "read data inserted sucessfully" });
         }
-      )
-      }
-    )
+      });
+    });
+  });
+},
 
-  },
 
   //assignRole
   // assignRole: (req, res) => { 
@@ -434,9 +424,33 @@ const userController = {
         }
       //return res.status(200).json({ status: "sucess",msg:"electric meter added sucessfully" });
       })
-    return res.status(200).json({ status: "sucess",msg:"electric meter added sucessfully" });
+      const currentDate = new Date();
+          const currentMonthName = currentDate.toLocaleString('default', { month: 'long' });
+
+         
+
+      const formdata = {
+        electric_meter_id: req.body.electric_meter_id ,
+             user_id: req.body.user_id,
+             read_data: "0000000000",
+             month: currentMonthName,
+      }
+      userService.insertIntoRead(formdata,
+        (err, results) => {
+          if (err) {
+            console.log(err);
+            return res.status(500).json({ msg: "database connection err during  email checking", });
+          }
+        })
+    
+    
+      return res.status(200).json({ status: "sucess", msg: "electric meter added sucessfully" });
   
       
+    
+    
+   
+    
     });
 
    },
